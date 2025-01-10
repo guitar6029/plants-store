@@ -34,11 +34,20 @@ model Basket {
   product Product @relation(fields: [productId], references: [id])
 }
 
+model Category {
+  id Int @id @default(autoincrement())
+  name String
+  products Product[]
+}
+
 model Product {
   id Int @id @default(autoincrement())
   name String
   description String
   price Float
   createdAt DateTime @default( now() )
+  categoryId Int
   baskets Basket[]
+
+  category Category @relation(fields: [categoryId], references: [id])
 }
